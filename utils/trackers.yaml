@@ -1,0 +1,14 @@
+---
+tracker_test:  # use tracker identifier as you want to call your tracker from terminal
+  tracker_path: TODO: insert-path  # path to the Python script with your tracker
+  class_name: TODO: insert-class-name  # class name of your tracker
+  paths:  # optionally: additional Python paths you want to include
+    - TODO: path1
+    - TODO: path2 ...
+
+# another trackers can be added here, similarly as in the upper example
+# here is an example for the NCC tracker:
+#ncc_tracker:
+#  tracker_path: path\to\python_ncc.py
+#  class_name: NCCTracker  
+...

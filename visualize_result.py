@@ -1,10 +1,10 @@
 import argparse
 import os
 
-from utils.utils import load_dataset, read_regions
+from utils.utils import load_tracker, load_dataset, read_regions
 
 
-def visualize_tracking_result(workspace_path, tracker_name, sequence_name, show_gt):
+def visualize_tracking_result(workspace_path, tracker_id, sequence_name, show_gt):
 
     dataset = load_dataset(workspace_path)
 
@@ -18,7 +18,10 @@ def visualize_tracking_result(workspace_path, tracker_name, sequence_name, show_
         print('Sequence (%s) cannot be found.' % sequence_name)
         exit(-1)
 
-    results_path = os.path.join(workspace_path, 'results', tracker_name, sequence.name, '%s_%03d.txt' % (sequence.name, 1))
+    tracker_class = load_tracker(workspace_path, tracker_id)
+    tracker = tracker_class()
+
+    results_path = os.path.join(workspace_path, 'results', tracker.name(), sequence.name, '%s_%03d.txt' % (sequence.name, 1))
     if not os.path.exists(results_path):
         print('Results does not exist (%s).' % results_path)
 

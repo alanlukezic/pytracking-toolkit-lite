@@ -1,4 +1,7 @@
+import os
+import sys
 import importlib.util
+import yaml
 
 
 def read_regions(regions_path):
@@ -44,11 +47,37 @@ def calculate_overlap(a: list, b: list):
     return (min(a[0] + a[2] - 1, b[0] + b[2] - 1) - max(a[0], b[0])) * (min(a[1] + a[3] - 1, b[1] + b[3] - 1) - max(a[1], b[1]))
 
 from utils.tracker import Tracker
-def load_tracker(tracker_path, tracker_id):
-    spec = importlib.util.spec_from_file_location(tracker_id, tracker_path)
+def load_tracker(workspace_path, tracker_id):
+
+    tracker_config = None
+    with open(os.path.join(workspace_path, 'trackers.yaml'), 'r') as yfile:
+        trackers = yaml.load(yfile, Loader=yaml.BaseLoader)
+        if tracker_id in trackers:
+            tracker_config = trackers[tracker_id]
+        else:
+            print('Tracker %s is not in the trackers.yaml file.' % tracker_id)
+            exit(-1)
+    
+    tracker_path = tracker_config['tracker_path']
+    tracker_class_name = tracker_config['class_name']
+
+    if not os.path.isfile(tracker_path):
+        print('The variable tracker_path is not a file.')
+        exit(-1)
+    
+    # det directory od the tracker file and add it to PYTHONPATH
+    sys.path.insert(0, os.path.dirname(tracker_path))
+
+    # check if another paths are specified and add them
+    if 'paths' in tracker_config:
+        for p in tracker_config['paths']:
+            if p not in sys.path:
+                sys.path.insert(0, p)
+    
+    spec = importlib.util.spec_from_file_location(tracker_class_name, tracker_path)
     module_ = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module_)
-    tracker_class = getattr(module_, tracker_id)
+    tracker_class = getattr(module_, tracker_class_name)
     return tracker_class
 
 from utils.dataset import Dataset

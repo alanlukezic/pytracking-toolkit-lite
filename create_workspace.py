@@ -3,6 +3,7 @@ import os
 
 import urllib.request
 import zipfile
+from shutil import copyfile
 
 
 def create_workspace(workspace_path, dataset_name):
@@ -45,17 +46,17 @@ def create_workspace(workspace_path, dataset_name):
     
     if not os.path.exists(os.path.join(workspace_path, 'results')):
         os.mkdir(os.path.join(workspace_path, 'results'))
-
-    if not os.path.exists(os.path.join(workspace_path, 'trackers_info.py')):
-        open(os.path.join(workspace_path, 'trackers_info.py'), 'w').close()
+    
+    # copy a template trackers.yaml file from utils to workspace directory
+    copyfile('utils/trackers.yaml', os.path.join(workspace_path, 'trackers.yaml'))
 
     print('Workspace has been created successfully.')
 
 def main():
     parser = argparse.ArgumentParser(description='Tracking Workspace Creation Utility')
 
-    parser.add_argument("--workspace_path", type='str', help="Path to the VOT workspace", required=True, action='store')
-    parser.add_argument("--dataset", type='str', help="VOT dataset (vot2013/vot2014/vot2015/vot2016)", required=True, action='store')
+    parser.add_argument("--workspace_path", help="Path to the VOT workspace", required=True, action='store')
+    parser.add_argument("--dataset", help="VOT dataset (vot2013/vot2014/vot2015/vot2016)", required=True, action='store')
 
     args = parser.parse_args()
 
