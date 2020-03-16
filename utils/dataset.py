@@ -15,10 +15,16 @@ class Dataset:
         self.sequences = []
         self._load_sequences(os.path.join(self.sequences_dir, 'list.txt'))
 
+    @property
+    def number_frames(self):
+        return self.total_length
+
     def _load_sequences(self, list_path):
         sequence_names = self._read_sequences_list(list_path)
+        self.total_length = 0
         for sequence in sequence_names:
             self.sequences.append(self._load_sequence(sequence))
+            self.total_length += self.sequences[-1].length
 
     def _read_sequences_list(self, list_path):
         with open(list_path, 'r') as f:

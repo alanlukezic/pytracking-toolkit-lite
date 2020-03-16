@@ -52,6 +52,7 @@ def create_workspace(workspace_path, dataset_name):
 
     print('Workspace has been created successfully.')
 
+
 def main():
     parser = argparse.ArgumentParser(description='Tracking Workspace Creation Utility')
 

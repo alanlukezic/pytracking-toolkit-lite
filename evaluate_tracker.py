@@ -19,6 +19,7 @@ def evaluate_tracker(workspace_path, tracker_id):
 
     tracker.evaluate(dataset, results_dir)
 
+
 def main():
     parser = argparse.ArgumentParser(description='Tracker Evaluation Utility')
 

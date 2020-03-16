@@ -3,8 +3,8 @@ import glob
 import cv2
 import numpy as np
 
-from utils.utils import read_regions
 from utils.utils import polygon2rectangle
+from utils.io_utils import read_regions
 
 
 class Sequence():

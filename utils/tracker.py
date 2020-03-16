@@ -1,8 +1,10 @@
 import os
+from timeit import default_timer as timer
 from abc import abstractmethod, ABC
 
 from utils.dataset import Dataset
-from utils.utils import calculate_overlap, save_regions
+from utils.utils import calculate_overlap
+from utils.io_utils import save_regions, save_vector
 
 
 class Tracker(ABC):
@@ -33,6 +35,7 @@ class Tracker(ABC):
                 os.mkdir(sequence_results_dir)
 
             results_path = os.path.join(sequence_results_dir, '%s_%03d.txt' % (sequence.name, 1))
+            time_path = os.path.join(sequence_results_dir, '%s_%03d_time.txt' % (sequence.name, 1))
 
             if os.path.exists(results_path):
                 continue
@@ -41,6 +44,7 @@ class Tracker(ABC):
             frame_index = 0
 
             results = sequence.length * [[0]]
+            times = sequence.length * [0]
 
             while frame_index < sequence.length:
 
@@ -48,13 +52,17 @@ class Tracker(ABC):
                 
                 if frame_index == init_frame:
                     
+                    t_ = timer()
                     self.initialize(img, sequence.gt_region(frame_index))
+                    times[frame_index] = timer() - t_
                     results[frame_index] = [1]
                     frame_index += 1
 
                 else:
 
+                    t_ = timer()
                     prediction = self.track(img)
+                    times[frame_index] = timer() - t_
 
                     if len(prediction) != 4:
                         print('Predicted region must be a list representing a bounding box in the format [x0, y0, width, height].')
@@ -69,3 +77,4 @@ class Tracker(ABC):
                         init_frame = frame_index
 
             save_regions(results, results_path)
+            save_vector(times, time_path)
