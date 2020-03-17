@@ -18,6 +18,7 @@ def evaluate_tracker(workspace_path, tracker_id):
         os.mkdir(results_dir)
 
     tracker.evaluate(dataset, results_dir)
+    print('Evaluation has been completed successfully.')
 
 
 def main():

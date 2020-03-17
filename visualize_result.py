@@ -1,7 +1,8 @@
 import argparse
 import os
 
-from utils.utils import load_tracker, load_dataset, read_regions
+from utils.utils import load_tracker, load_dataset 
+from utils.io_utils import read_regions
 
 
 def visualize_tracking_result(workspace_path, tracker_id, sequence_name, show_gt):
