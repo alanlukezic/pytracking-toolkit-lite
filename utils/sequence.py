@@ -21,6 +21,9 @@ class Sequence():
 
         self.frames = sorted(glob.glob(os.path.join(frames_dir, '*.jpg')))
 
+        if len(self.frames) > len(self.groundtruth):
+            self.frames = self.frames[len(self.frames) - len(self.groundtruth):]
+
     @property
     def length(self):
         return len(self.frames)
