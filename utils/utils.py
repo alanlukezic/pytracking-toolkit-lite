@@ -27,7 +27,7 @@ def calculate_overlap(a: list, b: list):
     if a[2] < 1 or a[3] < 1 or b[2] < 1 or b[3] < 1:
         return 0
 
-    intersection_area = (min(a[0] + a[2] - 1, b[0] + b[2] - 1) - max(a[0], b[0])) * (min(a[1] + a[3] - 1, b[1] + b[3] - 1) - max(a[1], b[1]))
+    intersection_area = max(0, min(a[0] + a[2] - 1, b[0] + b[2] - 1) - max(a[0], b[0])) * max(0, min(a[1] + a[3] - 1, b[1] + b[3] - 1) - max(a[1], b[1]))
     union_area = a[2] * a[3] + b[2] * b[3] - intersection_area
 
     return intersection_area / union_area
