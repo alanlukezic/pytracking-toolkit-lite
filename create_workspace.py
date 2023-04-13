@@ -9,7 +9,7 @@ from shutil import copyfile
 def create_workspace(workspace_path, dataset_name):
     
     if not os.path.exists(workspace_path):
-        print('Directory given as a workspace does not exist. Please create it meanually.')
+        print('Directory given as a workspace does not exist. Please create it manually.')
         exit(-1)
 
     # download dataset
