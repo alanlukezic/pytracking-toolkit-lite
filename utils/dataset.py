@@ -9,7 +9,7 @@ class Dataset:
         
         self.sequences_dir = os.path.join(workspace_path, 'sequences')
         if not os.path.isdir(self.sequences_dir):
-            print('Workspace directors (%s) does not have sequences directory.' % self.sequences_dir)
+            print('Workspace directory (%s) does not have sequences directory.' % self.sequences_dir)
             exit(-1)
 
         self.sequences = []
