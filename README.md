@@ -26,7 +26,7 @@ Note that the `tracker-id` is a tracker identifier (see example in `trackers.yam
 ```console
 python visualize_result.py --workspace_path ../workspace-dir --tracker tracker-id --sequence sequence-name
 ```
-The command will open a window and show a video with a predicted bounding box on a selected video sequence. Use the `--show-gt` flag to also show ground truth annotations.
+The command will open a window and show a video with a predicted bounding box on a selected video sequence. Use the `--show_gt` flag to also show ground truth annotations.
 - To calculate accuracy, total number of failures and tracking speed for a single tracker, you can run the following command:
 ```console
 python calculate_measures.py --workspace_path ../workspace-dir --tracker tracker-id
