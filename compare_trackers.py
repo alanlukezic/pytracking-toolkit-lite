@@ -32,11 +32,11 @@ def tracking_comparison(workspace_path, tracker_ids, sensitivity, output_path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Tracking Visualization Utility')
+    parser = argparse.ArgumentParser(description='Tracking Comparison Utility')
 
     parser.add_argument('--workspace_path', help='Path to the VOT workspace', required=True, action='store')
     parser.add_argument('--trackers', help='Tracker identifiers', required=True, action='store', nargs='*')
-    parser.add_argument('--sensitivity', help='Sensitivtiy parameter for robustness', default=100, type=int)
+    parser.add_argument('--sensitivity', help='Sensitivity parameter for robustness', default=100, type=int)
     parser.add_argument('--output_path', help='Path for the output image', default='', type=str)
 
     args = parser.parse_args()

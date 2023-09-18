@@ -26,7 +26,7 @@ def export_plot(outputs, sensitivity, output_path):
     styles = load_plot_styles()
 
     if len(outputs) > len(styles):
-        print('Number of compared trackers is larger than number of plot stlyes.')
+        print('Number of compared trackers is larger than number of plot styles.')
         print('Modify the script utils/plot_styles.py by adding more plot styles and re-run.')
         exit(-1)
     

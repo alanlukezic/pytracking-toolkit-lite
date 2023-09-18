@@ -1,7 +1,5 @@
 import argparse
 import os
-import sys
-import yaml
 
 from utils.utils import load_tracker, load_dataset
 
