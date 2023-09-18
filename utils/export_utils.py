@@ -13,7 +13,7 @@ def print_summary(output_dict):
     print('------------------------------------')
     print('Results for tracker:', output_dict['tracker_name'])
     print('  Average overlap: %.2f' % output_dict['average_overlap'])
-    print('  Total failures: %.1f' % output_dict['total_failures'])
+    print('  Total failures: %d' % output_dict['total_failures'])
     print('  Average speed: %.2f FPS' % output_dict['average_speed'])
     print('------------------------------------')
 
@@ -26,7 +26,7 @@ def export_plot(outputs, sensitivity, output_path):
     styles = load_plot_styles()
 
     if len(outputs) > len(styles):
-        print('Number of compared trackers is larger than number of plot stlyes.')
+        print('Number of compared trackers is larger than number of plot styles.')
         print('Modify the script utils/plot_styles.py by adding more plot styles and re-run.')
         exit(-1)
     

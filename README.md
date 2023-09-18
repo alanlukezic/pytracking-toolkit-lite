@@ -9,27 +9,31 @@ In the following you can find the instructions for creating a workspace, integra
 - Create a new directory (not within `toolkit-dir` directory) - we will call it `workspace-dir` </br>
 - Go to the `toolkit-dir` directory and run the command: 
 ```console
-python create_workspace.py --workspace_path workspace-dir --dataset dataset-version
+python create_workspace.py --workspace_path ../workspace-dir --dataset dataset-version
 ```
-Note that `dataset-version` represents the version of the VOT dataset and can be choosen among the following options: `vot2013`, `vot2014`, `vot2015`, `vot2016`. The script will automatically download the dataset (which can take some time), create several folders and the file `trackers.yaml` in the `toolkit-dir`. 
+Note that `dataset-version` represents the version of the VOT dataset and can be choosen among the following options: `vot2013`, `vot2014`, `vot2015`, `vot2016`. The script will automatically download the dataset (which can take some time), create several folders and the file `trackers.yaml` in the `workspace-dir`. 
 
 ## 2.) Tracker integration and running
-- After the workspace has been successfully created, edit the file `trackers.yaml` in the `toolkit-dir`. See the commented example for the NCC tracker in the `trackers.yaml`.
+- After the workspace has been successfully created, edit the file `trackers.yaml` in the `workspace-dir`. See the commented example for the NCC tracker in the `trackers.yaml`.
 - You can run your tracker on the dataset by running the following command:
 ```console
-python evaluate_tracker.py --workspace_path workspace-dir --tracker tracker_id
+python evaluate_tracker.py --workspace_path ../workspace-dir --tracker tracker_id
 ```
-Note that the `tracker-id` is a tracker identifier (see example in `trackers.yaml`, denoted as <i>tracker identifier</i>). The command will create a new directory with the name of your tracker in the `results` folder, which contains regions predicted by the tracker on all video sequences from the dataset.
+Note that the `tracker-id` is a tracker identifier (see example in `trackers.yaml`, denoted as <i>tracker identifier</i>). The command will create a new directory with the name of your tracker in the `results` folder, which contains regions predicted by the tracker on all video sequences from the dataset. Your tracker class thus needs to implement a function `name(self)` (see example trackers in `examples` directory) so the directory can be successfully created.
 
 ## 3.) Results visualization and tracking performance evaluation
 - After the `evaluate_tracker` command has successfully finished, you can visualize tracking results on a specific sequence (`sequence-name`) by running the following command:
 ```console
-python visualize_result.py --workspace_path workspace-dir --tracker tracker-id --sequence sequence-name
+python visualize_result.py --workspace_path ../workspace-dir --tracker tracker-id --sequence sequence-name
 ```
-The command will open a window and show a video with a predicted bounding box on a selected video sequence.
+The command will open a window and show a video with a predicted bounding box on a selected video sequence. Use the `--show_gt` flag to also show ground truth annotations.
+- To calculate accuracy, total number of failures and tracking speed for a single tracker, you can run the following command:
+```console
+python calculate_measures.py --workspace_path ../workspace-dir --tracker tracker-id
+```
 - To compare results of multiple trackers (which have previously been run on the dataset) you can run the following command:
 ```console
-python compare_trackers.py --workspace_path workspace-dir --trackers tracker-id1 tracker-id2 tracker-id3 ... --sensitivity 100
+python compare_trackers.py --workspace_path ../workspace-dir --trackers tracker-id1 tracker-id2 tracker-id3 ... --sensitivity 100
 ```
 Note that `...` denotes arbitrary number of trackers which can be compared. This command calculates two tracking performance measures: accuracy and robustness and stores the per-sequence results in the directory: `workspace-dir/analysis/tracker-id/results.json`. Additionally, you can find the AR plot in the `workspace-dir/analysis/ar.png` comparing all trackers you specified when running the comparison command.
 

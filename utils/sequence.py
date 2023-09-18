@@ -3,7 +3,7 @@ import glob
 import cv2
 import numpy as np
 
-from utils.utils import polygon2rectangle
+from utils.utils import polygon2rectangle, rectangle2polygon
 from utils.io_utils import read_regions
 
 
@@ -63,7 +63,7 @@ class Sequence():
             print('Unknown output region format: %s. Supported only RECTANGLE and POLYGON.' % format)
             exit(-1)
 
-        return self.groundtruth[frame_index]
+        # return self.groundtruth[frame_index]
 
     def visualize_results(self, regions, show_groundtruth=False):
         print('********************************************************')

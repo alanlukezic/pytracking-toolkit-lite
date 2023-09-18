@@ -6,9 +6,9 @@ tracker_test:  # use tracker identifier as you want to call your tracker from te
     - insert\path\1
     - insert\path\2 ...
 
-# another trackers can be added here, similarly as in the upper example
+# Other trackers can be added here, similarly as in the upper example
 # here is an example for the NCC tracker:
-#ncc_tracker:
-#  tracker_path: path\to\python_ncc.py
-#  class_name: NCCTracker  
+# ncc_tracker:
+#   tracker_path: path\to\python_ncc.py
+#   class_name: NCCTracker  
 ...

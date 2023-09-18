@@ -21,7 +21,7 @@ def calculate_overlap(a: list, b: list):
         b = polygon2rectangle(b)
 
     if len(a) != 4 or len(b) != 4:
-        print('Both regions must have 4 elements (bounding box) to calcualte overlap.')
+        print('Both regions must have 4 elements (bounding box) to calculate overlap.')
         exit(-1)
 
     if a[2] < 1 or a[3] < 1 or b[2] < 1 or b[3] < 1:
@@ -36,7 +36,7 @@ def trajectory_overlaps(t1: list, t2: list):
     # calcualte per-frame overlap for a trajectory (multiple frames)
     if len(t1) != len(t2):
         print('Error: Trajectories must be the same length.')
-        print(-1)
+        exit(-1)
     
     overlaps = len(t1) * [0]
     valid = len(t1) * [0]

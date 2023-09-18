@@ -44,7 +44,7 @@ def tracking_analysis(workspace_path, tracker_id):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Tracking Visualization Utility')
+    parser = argparse.ArgumentParser(description='Tracker Metrics Utility')
 
     parser.add_argument('--workspace_path', help='Path to the VOT workspace', required=True, action='store')
     parser.add_argument('--tracker', help='Tracker identifier', required=True, action='store')
