@@ -4,6 +4,8 @@ import os
 import urllib.request
 import zipfile
 from shutil import copyfile
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
 
 def create_workspace(workspace_path, dataset_name):
