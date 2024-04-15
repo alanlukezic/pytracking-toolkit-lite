@@ -9,7 +9,7 @@ def polygon2rectangle(p):
     y0 = min(p[1::2])
     x1 = max(p[::2])
     y1 = max(p[1::2])
-    return [x0, y0, x1 - x0 + 1, y1 - y0 + 1]
+    return [x0, y0, x1 - x0, y1 - y0]
 
 def rectangle2polygon(r):
     return [r[0], r[1], r[0] + r[2], r[1], r[0] + r[2], r[1] + r[3], r[0], r[1] + r[3]]
@@ -27,7 +27,7 @@ def calculate_overlap(a: list, b: list):
     if a[2] < 1 or a[3] < 1 or b[2] < 1 or b[3] < 1:
         return 0
 
-    intersection_area = max(0, min(a[0] + a[2] - 1, b[0] + b[2] - 1) - max(a[0], b[0])) * max(0, min(a[1] + a[3] - 1, b[1] + b[3] - 1) - max(a[1], b[1]))
+    intersection_area = max(0, min(a[0] + a[2], b[0] + b[2]) - max(a[0], b[0])) * max(0, min(a[1] + a[3], b[1] + b[3]) - max(a[1], b[1]))
     union_area = a[2] * a[3] + b[2] * b[3] - intersection_area
 
     return intersection_area / union_area
